@@ -1,3 +1,20 @@
+<?php
+  require_once "../conexao/conexao.php"; 
+
+$query = sprintf("SELECT * FROM disciplinas");
+
+$aux = sprintf("SELECT j.* from planos_aula as p join jogos as j on j.id = p.jogos_id join disciplinas as d on d.id = p.disciplinas_id");
+
+$dados = mysqli_query($conn,$query);
+$linha = mysqli_fetch_assoc($dados);
+$total = mysqli_num_rows($dados);
+
+
+$dados2 = mysqli_query($conn,$aux);
+$linha2 = mysqli_fetch_assoc($dados2);
+$total2 = mysqli_num_rows($dados2);
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -68,6 +85,9 @@
             </div>
         </div>
     </header>
+    <hr />
+    
+ 
     <div class="container-fluid">
 
         <div class="col-sm-12 text-center my-3">
@@ -81,165 +101,59 @@
             </div>
         </div>
 
+    </div>
+
+    <?php
+        do {
+    ?>   
+
         <div class="container-fluid">
-            <div class="row justify-content-center mb-5">
+            <div class="row justify-content-center">
                 <div class="col-sm-10">
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
                                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          	Disciplina 001
-        	</button>
+                                    <p><?=$linha['nome']?></p>
+        	                        </button>
                                 </h5>
                             </div>
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                 <div class="card-body">
                                     <div class="jumbotron jumbotron-fluid">
                                         <div class="col-sm-12">
-                                            <h1 class="display-4">Disciplina 001</h1>
-                                            <p>Curabitur accumsan eu augue vel sagittis. Praesent libero urna, semper non mattis ut, feugiat in ex. Maecenas nec risus ultricies est pulvinar pulvinar. Ut dui magna, sagittis vel nisl non, iaculis consectetur
-                                                quam. Etiam nec sem a enim molestie pulvinar. Nulla nec dictum mi. Nullam sodales ligula neque, ac posuere mi malesuada eget. Nullam eu enim at neque fermentum ullamcorper.</p>
+                                            <h1 class="display-4"><?=$linha['nome']?></h1>
+                                            <p><?=$linha['descricao']?></p>
                                         </div>
+            
                                         <div class="col-sm-12">
                                             <h5> Jogos a que esta disciplina está vinculada: </h5>
+                                            <?php
+                                                do {
+                                            ?> 
                                             <div class="list-group">
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo001</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo002</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo003</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo004</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo005</a>
+                                                <a href="#" class="list-group-item list-group-item-action"><?=$linha2['nome']?></a>
                                             </div>
+                                            <?php
+                                                }while($linha2 = mysqli_fetch_assoc($dados2));
+                                            ?>
                                         </div>
+                                   
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-header" id="headingTwo">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Disciplina 002
-        </button>
-                                </h5>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                <div class="card-body">
-                                    <div class="jumbotron jumbotron-fluid">
-                                        <div class="col-sm-12">
-                                            <h1 class="display-4">Disciplina 002</h1>
-                                            <p>Curabitur accumsan eu augue vel sagittis. Praesent libero urna, semper non mattis ut, feugiat in ex. Maecenas nec risus ultricies est pulvinar pulvinar. Ut dui magna, sagittis vel nisl non, iaculis consectetur
-                                                quam. Etiam nec sem a enim molestie pulvinar. Nulla nec dictum mi. Nullam sodales ligula neque, ac posuere mi malesuada eget. Nullam eu enim at neque fermentum ullamcorper.</p>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <h5> Jogos a que esta disciplina está vinculada: </h5>
-                                            <div class="list-group">
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo001</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo002</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo003</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo004</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo005</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingThree">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-         Disciplina 003
-        </button>
-                                </h5>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                <div class="card-body">
-                                    <div class="jumbotron jumbotron-fluid">
-                                        <div class="col-sm-12">
-                                            <h1 class="display-4">Disciplina 003</h1>
-                                            <p>Curabitur accumsan eu augue vel sagittis. Praesent libero urna, semper non mattis ut, feugiat in ex. Maecenas nec risus ultricies est pulvinar pulvinar. Ut dui magna, sagittis vel nisl non, iaculis consectetur
-                                                quam. Etiam nec sem a enim molestie pulvinar. Nulla nec dictum mi. Nullam sodales ligula neque, ac posuere mi malesuada eget. Nullam eu enim at neque fermentum ullamcorper.</p>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <h5> Jogos a que esta disciplina está vinculada: </h5>
-                                            <div class="list-group">
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo001</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo002</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo003</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo004</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo005</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingFour">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-         Disciplina 004
-        </button>
-                                </h5>
-                            </div>
-                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                                <div class="card-body">
-                                    <div class="jumbotron jumbotron-fluid">
-                                        <div class="col-sm-12">
-                                            <h1 class="display-4">Disciplina 004</h1>
-                                            <p>Curabitur accumsan eu augue vel sagittis. Praesent libero urna, semper non mattis ut, feugiat in ex. Maecenas nec risus ultricies est pulvinar pulvinar. Ut dui magna, sagittis vel nisl non, iaculis consectetur
-                                                quam. Etiam nec sem a enim molestie pulvinar. Nulla nec dictum mi. Nullam sodales ligula neque, ac posuere mi malesuada eget. Nullam eu enim at neque fermentum ullamcorper.</p>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <h5> Jogos a que esta disciplina está vinculada: </h5>
-                                            <div class="list-group">
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo001</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo002</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo003</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo004</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo005</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingFive">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-         Disciplina 005
-        </button>
-                                </h5>
-                            </div>
-                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                                <div class="card-body">
-                                    <div class="jumbotron jumbotron-fluid">
-                                        <div class="col-sm-12">
-                                            <h1 class="display-4">Disciplina 005</h1>
-                                            <p>Curabitur accumsan eu augue vel sagittis. Praesent libero urna, semper non mattis ut, feugiat in ex. Maecenas nec risus ultricies est pulvinar pulvinar. Ut dui magna, sagittis vel nisl non, iaculis consectetur
-                                                quam. Etiam nec sem a enim molestie pulvinar. Nulla nec dictum mi. Nullam sodales ligula neque, ac posuere mi malesuada eget. Nullam eu enim at neque fermentum ullamcorper.</p>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <h5> Jogos a que esta disciplina está vinculada: </h5>
-                                            <div class="list-group">
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo001</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo002</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo003</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo004</a>
-                                                <a href="#" class="list-group-item list-group-item-action">Jogo005</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+        <?php
+            }while($linha = mysqli_fetch_assoc($dados));
+        ?>
 
+    <br><br><br><br><br>
 
         <footer class="footer mt-auto py-4 bg-light" id="rodape">
             <div class="col-sm-12">

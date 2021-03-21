@@ -1,8 +1,6 @@
 <?php
-require_once 'usuarios.php';
-$u = new Usuario;
+	session_start();
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -74,8 +72,7 @@ $u = new Usuario;
         </div>
     </header>
 
-    <div class="container-fluid">
-
+    <hr />
         <div class="col-sm-12 text-center my-3">
             <h1>Login</h1>
             <div class="row justify-content-center mb-5 my-5">
@@ -88,74 +85,35 @@ $u = new Usuario;
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-sm-4">
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-sm-12">
-                            <label for="inputEmail">E-mail</label>
-                            <input type="text" class="form-control" id="inputEmail" placeholder="exemplo@gmail.com" required>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <label for="inputPassword">Senha</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Senha..." required>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="lembre-me"> Lembrar senha
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-sm-12">
-                            <a href="index.php" class="btn btn-primary">Cancelar </a>
-                            <button type="submit" class="btn btn-primary">Entrar</button>
-                        </div>
-                    </div>
-                </form>
+        <div class="container">
+            <div class="row justify-content-center py-4">
+                <div class="col-sm-12">
+                    <form class="form-signin" method="POST" action="valida.php">
+                        <label for="inputEmail" class="py-2">Email</label>
+                        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                        <label for="inputPassword" class="py-2">Senha</label>
+                        <input type="password" name="senha" id="inputPassword" class="form-control mb-5" placeholder="Senha" required>
+                        <button id="botao" class="btn btn-lg btn-block" type="submit">Acessar</button>
+                    </form>
+                    <p class="text-center text-danger">
+                        <?php if(isset($_SESSION['loginErro'])){
+                            echo $_SESSION['loginErro'];
+                            unset($_SESSION['loginErro']);
+                        }?>
+                    </p>
+                    <p class="text-center text-success">
+                        <?php 
+                        if(isset($_SESSION['logindeslogado'])){
+                            echo $_SESSION['logindeslogado'];
+                            unset($_SESSION['logindeslogado']);
+                        }
+                        ?>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <?php
-    if (isset($_POST['email'])) {
-        $email = addslashes($_POST['email']);
-        $senha = addslashes($_POST['senha']);
-        $acesso = addslashes($_POST['acesso']);
-
-        if (!empty($email) && !empty($senha) && !empty($acesso)) {
-            $u->conectar("letsplay", "localhost", "root", "root");
-            if ($u->msgErro == "") {
-                if ($u->logar($email, $senha, $acesso)) {
-    ?>
-                    <script>
-                        window.location.href = "index.php";
-                    </script>
-                <?php
-                } else {
-                ?>
-                    <div id="msg-erro">
-                        E-mail ou senha estão incorretos!
-                    </div>
-                <?php
-                }
-            } else {
-                ?>
-                <?php echo "Erro: " . $u->msgErro; ?>
-            <?php
-            }
-        } else {
-            ?>
-            <div id="msg-erro">
-                Preencha todos os campos!
-            </div>
-    <?php
-        }
-    }
-    ?>
+    <br><br><br><br><br><br><br>
 
     <footer class="footer mt-auto py-4 bg-light" id="rodape">
         <div class="col-sm-12">

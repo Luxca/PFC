@@ -1,3 +1,12 @@
+<?php
+  require_once '../classes/usuarios.php';
+  require_once "../conexao/conexao.php";
+  $resultado = mysqli_query($conn, "select * from tipo_perfil");
+
+  
+  $u = new Usuario;
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -68,7 +77,7 @@
             </div>
         </div>
     </header>
-
+    <hr />
     <div class="container-fluid">
 
         <div class="col-sm-12 text-center my-3">
@@ -86,69 +95,122 @@
             </div>
         </div>
 
-        <div class="row justify-content-center mb-5">
-            <div class="col-sm-5">
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-sm-12">
-                            <label for="inputNome">Nome</label>
-                            <input type="text" class="form-control" id="inputNome" placeholder="Nome..." required>
-                        </div>
+      <div class="row justify-content-center mb-5">
+        <div class="col-sm-8">
+          <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="needs-validation" novalidate method="POST" enctype="multipart/form-data" method="POST">
+            <div class="form-row">
+              <div class="form-group col-sm-12">
+                <label for="inputNome">Nome</label>
+                <input type="text" name="nome" class="form-control" id="inputNome" maxlength="30" placeholder="Nome..." required>
+              </div>
 
-                        <div class="col-md-5 mb-3">
-                            <label for="perfil">Tipo de Perfil</label>
-                            <select class="custom-select d-block w-100" id="perfil" required>
-                <option value="">Escolha...</option>
-                <option>Aluno/Usuário</option>
-                <option>Professor</option>
-              </select>
-                        </div>
+              <div class="col-md-5 mb-3">
+                  <label for="perfil">Tipo de Perfil</label>
+                  <select class="custom-select d-block w-100" name="perfil" required>
+                   <?php
+                   while($tipo_perfil = mysqli_fetch_array($resultado)) {
+                      echo "<option value=".$tipo_perfil['id'].">".$tipo_perfil['descricao']."</option>";
+                   }
+                  ?>
 
-                        <div class="form-group col-sm-12">
-                            <label for="inputEmail">E-mail</label>
-                            <input type="text" class="form-control" id="inputEmail" placeholder="exemplo@gmail.com" required>
-                        </div>
+                </select>
+              </div>
 
-                        <div class="form-group col-sm-12">
-                            <label for="inputPassword">Senha</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Senha..." required>
-                        </div>
+       
+              <div class="form-group col-sm-12">
+                <label for="inputEmail">E-mail</label>
+                <input type="email" name="email" class="form-control" id="inputEmail" maxlength="40" placeholder="exemplo@gmail.com" required>
+              </div>
 
-                        <div class="form-group col-sm-12">
-                            <label for="inputPassword">Confirmar Senha</label>
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Confirmar Senha..." required>
-                        </div>
+              <div class="form-group col-sm-12">
+                <label for="inputPassword">Senha</label>
+                <input type="password" name="senha" id="inputPassword" class="form-control" maxlength="15" placeholder="Senha..." required>
+              </div>
 
-                        <div class="form-group col-sm-12">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                  <input class="form-check-input" type="checkbox">Desejo receber novidades por e-mail
-                </label>
-                            </div>
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <a href="index.php" class="btn btn-primary">Cancelar </a>
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
-                        </div>
-                    </div>
-                </form>
+              <div class="form-group col-sm-12">
+                <label for="inputPassword">Confirmar Senha</label>
+                <input type="password" name="confSenha" id="inputPassword" class="form-control" maxlength="15" placeholder="Confirmar Senha..." required>
+              </div>
+
+              <div class="form-group col-sm-12">
+                <a href="index.php" class="btn btn-primary" id="botao">Cancelar </a>
+                <button id="botao" type="submit" class="btn btn-primary">Cadastrar</button>
+              </div>
             </div>
+          </form>
         </div>
-    </div>
+      </div>
 
-    <footer class="footer mt-auto py-4 bg-light" id="rodape">
-        <div class="col-sm-12">
-            <span class="text-muted">&copy 2020</span>
-        </div>
+
+
+    <?php
+
+        if(isset($_POST['nome']))
+        {
+         $email = addslashes($_POST['email']);
+         $senha = addslashes($_POST['senha']);        
+         $confirmarSenha = addslashes($_POST['confSenha']);
+         $nome = addslashes($_POST['nome']);
+
+          $tipo_perfil = ($_POST['perfil']);
+   
+
+         if(!empty($email) && !empty($senha) && !empty($confirmarSenha) && !empty($nome) && !empty($tipo_perfil))
+         {
+            $u->conectar("pfc", "127.0.0.1", "root", "");
+            if($u->msgErro == "")
+            {
+              if($senha == $confirmarSenha)
+              {
+                if($u->cadastrar($email, $senha, $nome, $tipo_perfil))
+                {
+                  ?>
+                    <div id="msg-sucesso">
+                      Cadastrado com sucesso!
+                    </div>
+                  <?php
+                }
+                else
+                {
+                  ?>
+                    <div id="msg-erro">
+                      Email já cadastrado;
+                    </div>
+                  <?php
+                }
+              }
+              else
+              {
+                ?>
+                  <div id="msg-erro">
+                    Senha e Confirmação não correspondem!
+                  </div>
+                <?php
+              }
+            }
+            else
+            {
+              ?>
+                <div id="msg-erro">
+                  <?php echo "Erro: ".$u->msgErro ?>
+                </div> 
+              <?php
+            }
+         }
+
+        }
+      ?>
+    </div>
+    
+    <footer class="footer mt-auto bg-light py-4" id="rodape">
+      <div class="col-sm-12">
+        <span class="text-muted">&copy 2020</span>
+      </div>
     </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-
-
-</body>
-
+    </body>
 </html>

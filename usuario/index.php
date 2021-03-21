@@ -72,53 +72,52 @@
 
     <hr />
 
-    <div class="container-fluid">
-            <div class="col-sm-12">
-                <section id="index">
-                    <h1>Let's Play: Do que se trata essa plataforma?</h1>
-                    <h2>Let's Play é uma plataforma para promover a cultura dos jogos digitais na educação. A plataforma disponibiliza diversos jogos digitais que podem ser utilizados de forma eficiente na educação, separados por disciplinas e temas transversais,
-                        como economia e política. Mas por que promover essa cultura é tão importante?</h2>
-                    <section id="aux">
-                        <div class="container">
-                            <div class="col-sm-12 my-3">
-                                <div class="row">
-                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                        <ol class="carousel-indicators">
-                                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                                        </ol>
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active">
-                                                <img class="d-block w-100" src="img/thelastofus.jpg" alt="First slide">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="img/thewitcher3.jpg" alt="Second slide">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="img/assassinscreed.jpg" alt="Third slide">
-                                            </div>
-                                            <div class="carousel-item">
-                                                <img class="d-block w-100" src="img/skyrim.jpg" alt="Fourth slide">
-                                            </div>
-                                        </div>
-                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </div>
-
-                                </div>
-                            </div>
+    <div id="aux" class="aux">
+        <div class="container">
+            <div class="col-sm-12 my-5">
+                <div class="row justify-content-center">
+                    <h3><strong>Let's Play:</strong> Do que se trata essa plataforma?</h3>
+                 
+                    <p>
+                        <center>Let's Play é uma plataforma para promover a cultura dos jogos digitais na educação. A plataforma disponibiliza diversos jogos digitais que podem ser utilizados de forma eficiente na educação, separados por disciplinas e temas transversais, como economia e política. Mas por que promover essa cultura é tão importante?</center>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <br><br>
+                        <div class="box">
+                            <a class="nav-link" href="disciplinas.php"><span>Disciplinas</span></a>
+                            <li>Todos os jogos são separados por disciplinas da grade curricular atual, como: História, Geografia...</li>
                         </div>
-                    </section>
-                </section>
+                    </div>
 
+                    <div class="col-sm-6">
+                        <br><br>
+                        <div class="box">
+                            <a class="nav-link" href="temasTransversais.php"><span>Temas Transversais</span></a>
+                            <li>Todos os jogos são separados por diferentes tipos de temas transversais, como: Economia, Política...</li>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <br><br>
+                        <div class="box">
+                            <a class="nav-link" href="planosAula.php"><span>Planos de aula</span></a>
+                            <li>A plataforma possibilita a visualização e criação de planos de aula utilizando os diversos jogos catalogados.</li>
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <br><br>
+                        <div class="box">
+                            <a class="nav-link" href="jogos.php"><span>Jogos</span></a>
+                            <li>Todas as informações de jogos catalogados estarão disponíveis para visualização, além de ser possível realizar sugestões de jogos.</li>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 

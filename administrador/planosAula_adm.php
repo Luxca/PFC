@@ -2,21 +2,25 @@
   require_once "../conexao/conexao.php"; 
 
 $query = sprintf("SELECT * FROM planos_aula");
-$query2 = sprintf("SELECT j.* from planos_aula as p join jogos as j on j.id = p.jogos_id");
-$query3 = sprintf("SELECT d.* from planos_aula as p join disciplinas as d on d.id = p.disciplinas_id");
-$query4 = sprintf("SELECT t.* from planos_aula as p join temas_transversais as t on t.id = p.temas_transversais_id");
+$query2 = sprintf("SELECT j.* from jogos as j join planos_aula as p on j.id = p.jogos_id where p.jogos_id = j.id");
+$query3 = sprintf("SELECT d.* from disciplinas as d join planos_aula as p on d.id = p.disciplinas_id where p.disciplinas_id = d.id");
+$query4 = sprintf("SELECT t.* from temas_transversais as t join planos_aula as p on t.id = p.temas_transversais_id where p.temas_transversais_id = t.id");
 
 $dados = mysqli_query($conn,$query);
 $linha = mysqli_fetch_assoc($dados);
+$total = mysqli_num_rows($dados);
 
 $dados2 = mysqli_query($conn,$query2);
 $linha2 = mysqli_fetch_assoc($dados2);
+$total2 = mysqli_num_rows($dados2);
 
 $dados3 = mysqli_query($conn,$query3);
 $linha3 = mysqli_fetch_assoc($dados3);
+$total3 = mysqli_num_rows($dados3);
 
 $dados4 = mysqli_query($conn,$query4);
 $linha4 = mysqli_fetch_assoc($dados4);
+$total4 = mysqli_num_rows($dados4);
 
 
 ?>
@@ -38,62 +42,53 @@ $linha4 = mysqli_fetch_assoc($dados4);
 </head>
 
 <body>
-    <header>
-        <div class="container-fluid" id="nav">
-            <div class="row">
-                <div class="col-sm-12">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.php">
-                            <img src="img/logo.png" id="logo">
-                        </a>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.php">
-                                        <p class="text-monospace">Página Inicial</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="planosAula.php">
-                                        <p class="text-monospace">Planos de Aula</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="disciplinas.php">
-                                        <p class="text-monospace">Disciplinas</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="temasTransversais.php">
-                                        <p class="text-monospace">Temas Transversais</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="jogos.php">
-                                        <p class="text-monospace">Jogos</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="login.php">
-                                        <p class="text-monospace">Entrar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="cadastroPerfil.php">
-                                        <p class="text-monospace">Cadastrar-se</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+<header>
+    <div class="container-fluid" id="nav">
+        <div class="row justify-content-center">
+            <div class="col-sm-10">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="index_adm.php">
+                        <img src="../usuario/img/logo.png" id="logo">
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index_adm.php">
+                                    <p class="text-monospace">Página Inicial</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="planosAula_adm.php">
+                                    <p class="text-monospace">Planos de Aula</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="disciplinas_adm.php">
+                                    <p class="text-monospace">Disciplinas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="temasTransversais_adm.php">
+                                    <p class="text-monospace">Temas Transversais</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="jogos_adm.php">
+                                    <p class="text-monospace">Jogos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../usuario/index.php">
+                                    <p class="text-monospace">Sair</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
         </div>
-    </header>
-
-    <hr />
+    </div>
+</header>
 
     <div class="container-fluid">
 
@@ -111,10 +106,9 @@ $linha4 = mysqli_fetch_assoc($dados4);
                 </div>
             </div>
         </div>
+    </div>
 
-        </div>
-
-        <?php
+    <?php
             do {
  
         ?>   
@@ -139,27 +133,13 @@ $linha4 = mysqli_fetch_assoc($dados4);
                                                 <h1 class="display-4"><?=$linha['nome']?></h1>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <h6>Jogo: <?php if($linha2 = mysqli_fetch_assoc($dados2)) {     
-                                                    echo $linha2['nome'] ;
-                                                    }
-                                                    ?>
-                                                </h6>  
-                                               
-                                                   
+                                                <h6>Jogo: <?=$linha2['nome']?></h6>   
                                             </div>
                                             <div class="row justify-content-center">
-                                                <h6>Disciplina: <?php if($linha3 = mysqli_fetch_assoc($dados3)) {     
-                                                    echo $linha3['nome'] ;
-                                                    }
-                                                    ?>
-                                                </h6>  
+                                                <h6>Disciplina: <?=$linha3['nome']?></h6>
                                             </div>
                                             <div class="row justify-content-center">
-                                            <h6>Tema Transversal: <?php if($linha4 = mysqli_fetch_assoc($dados4)) {     
-                                                    echo $linha4['nome'] ;
-                                                    }
-                                                    ?>
-                                                </h6>  
+                                                <h6>Tema Transversal: <?=$linha4['nome']?></h6>
                                             </div>
                                             <div class="row justify-content-center">
                                                 <h6>Série: <?=$linha['serie']?></h6>
@@ -211,9 +191,15 @@ $linha4 = mysqli_fetch_assoc($dados4);
             }while($linha = mysqli_fetch_assoc($dados));
         ?>
 
-        <br><br><br><br>
- 
-        <footer class="footer mt-5 py-4 bg-light" id="rodape">
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-5 mb-5">
+                <div class="col-sm-1">
+                    <a href="cadastrar_plano.php" id="botao" class="btn" role="button" aria-pressed="true">Cadastrar Plano de Aula</a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer mt-auto py-4 bg-light" id="rodape">
             <div class="col-sm-12">
                 <span class="text-muted">&copy 2020</span>
             </div>

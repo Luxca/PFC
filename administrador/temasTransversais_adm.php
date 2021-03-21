@@ -32,62 +32,53 @@ $total2 = mysqli_num_rows($dados2);
 </head>
 
 <body>
-    <header>
-        <div class="container-fluid" id="nav">
-            <div class="row">
-                <div class="col-sm-12">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="index.php">
-                            <img src="img/logo.png" id="logo">
-                        </a>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.php">
-                                        <p class="text-monospace">Página Inicial</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="planosAula.php">
-                                        <p class="text-monospace">Planos de Aula</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="disciplinas.php">
-                                        <p class="text-monospace">Disciplinas</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="temasTransversais.php">
-                                        <p class="text-monospace">Temas Transversais</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="jogos.php">
-                                        <p class="text-monospace">Jogos</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="login.php">
-                                        <p class="text-monospace">Entrar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="cadastroPerfil.php">
-                                        <p class="text-monospace">Cadastrar-se</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+<header>
+    <div class="container-fluid" id="nav">
+        <div class="row justify-content-center">
+            <div class="col-sm-10">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="index_adm.php">
+                        <img src="../usuario/img/logo.png" id="logo">
+                    </a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index_adm.php">
+                                    <p class="text-monospace">Página Inicial</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="planosAula_adm.php">
+                                    <p class="text-monospace">Planos de Aula</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="disciplinas_adm.php">
+                                    <p class="text-monospace">Disciplinas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="temasTransversais_adm.php">
+                                    <p class="text-monospace">Temas Transversais</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="jogos_adm.php">
+                                    <p class="text-monospace">Jogos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../usuario/index.php">
+                                    <p class="text-monospace">Sair</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
             </div>
         </div>
-    </header>
-
-    <hr />
+    </div>
+</header>
 
     <div class="container-fluid">
 
@@ -156,8 +147,18 @@ $total2 = mysqli_num_rows($dados2);
         <?php
             }while($linha = mysqli_fetch_assoc($dados));
         ?>
+
+
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-5 mb-5">
+                <div class="col-sm-1">
+                    <a href="cadastrar_tema.php" id="botao" class="btn" role="button" aria-pressed="true">Cadastrar Tema Transversal</a>
+                </div>
+            </div>
+        </div>
+
         
-<br><br><br><br><br>
+        <br><br><br><br><br>
 
         <footer class="footer mt-auto mt-5 py-4 bg-light" id="rodape">
             <div class="col-sm-12">
