@@ -45,9 +45,34 @@
                 $sql->bindValue(":disc", $disciplina_id);
                 $sql->bindValue(":tt", $tema_transversal_id);
 
+
 				$sql->execute();
 				return true;			
 			}
 		}
+		public function cadastrar2($jogos_id, $disciplinas_id){
+
+			global $pdo2;
+
+			$sql2 = $pdo2->prepare("SELECT * FROM jogos_has_disciplinas");
+			$sql2->execute();
+
+			if($sql2->rowCount() > 0)
+			{
+				return false;
+			}
+			else
+			{
+
+				$sql2 = $pdo2->prepare("INSERT INTO jogos_has_disciplinas (jogos_id, disciplinas_id) VALUES(:jid, :did)");
+				$sql2->bindVale(":jid", $jogos_id);
+				$sql2->bindVale(":dis", $disciplinas_id);
+
+				$sql2->execute();
+				return true;	
+		}
+
+
 	}
+}
 ?>

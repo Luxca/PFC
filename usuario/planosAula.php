@@ -1,22 +1,18 @@
 <?php
   require_once "../conexao/conexao.php"; 
 
-$query = sprintf("SELECT * FROM planos_aula");
-$query2 = sprintf("SELECT j.* from planos_aula as p join jogos as j on j.id = p.jogos_id");
-$query3 = sprintf("SELECT d.* from planos_aula as p join disciplinas as d on d.id = p.disciplinas_id");
-$query4 = sprintf("SELECT t.* from planos_aula as p join temas_transversais as t on t.id = p.temas_transversais_id");
+$query = "SELECT * from planos_aula";
+$query2 = "SELECT j.* from jogos as j join planos_aula as p on j.id = p.jogos_id order by p.id";
+$query3 = "SELECT d.* from disciplinas as d join planos_aula as p on d.id = p.disciplinas_id order by p.id";
+$query4 = "SELECT t.* from temas_transversais as t join planos_aula as p on t.id = p.temas_transversais_id order by p.id";
 
 $dados = mysqli_query($conn,$query);
 $linha = mysqli_fetch_assoc($dados);
 
-$dados2 = mysqli_query($conn,$query2);
-$linha2 = mysqli_fetch_assoc($dados2);
 
-$dados3 = mysqli_query($conn,$query3);
-$linha3 = mysqli_fetch_assoc($dados3);
-
-$dados4 = mysqli_query($conn,$query4);
-$linha4 = mysqli_fetch_assoc($dados4);
+$linha2 = mysqli_query($conn,$query2);
+$linha3 = mysqli_query($conn,$query3);
+$linha4 = mysqli_query($conn,$query4);
 
 
 ?>
@@ -92,11 +88,8 @@ $linha4 = mysqli_fetch_assoc($dados4);
             </div>
         </div>
     </header>
-
     <hr />
-
     <div class="container-fluid">
-
         <div class="col-sm-12 text-center my-3">
             <h1>Planos de Aula</h1>
             <div class="row justify-content-center mb-5 my-5">
@@ -139,24 +132,23 @@ $linha4 = mysqli_fetch_assoc($dados4);
                                                 <h1 class="display-4"><?=$linha['nome']?></h1>
                                             </div>
                                             <div class="row justify-content-center">
-                                                <h6>Jogo: <?php if($linha2 = mysqli_fetch_assoc($dados2)) {     
-                                                    echo $linha2['nome'] ;
+                                                <h6>Jogo: <?php if($jogo = mysqli_fetch_array($linha2)) {     
+                                                        echo $jogo['nome'] ;
                                                     }
                                                     ?>
                                                 </h6>  
-                                               
                                                    
                                             </div>
                                             <div class="row justify-content-center">
-                                                <h6>Disciplina: <?php if($linha3 = mysqli_fetch_assoc($dados3)) {     
-                                                    echo $linha3['nome'] ;
+                                                <h6>Disciplina: <?php if($disciplina = mysqli_fetch_array($linha3)) {     
+                                                    echo $disciplina['nome'] ;
                                                     }
                                                     ?>
                                                 </h6>  
                                             </div>
                                             <div class="row justify-content-center">
-                                            <h6>Tema Transversal: <?php if($linha4 = mysqli_fetch_assoc($dados4)) {     
-                                                    echo $linha4['nome'] ;
+                                                <h6>Tema Transversal: <?php if($tema = mysqli_fetch_array($linha4)) {     
+                                                    echo $tema['nome'] ;
                                                     }
                                                     ?>
                                                 </h6>  

@@ -212,6 +212,9 @@
          $disciplina_id = ($_POST['disciplina']);
          $tema_transversal_id = ($_POST['tema_transversal']);
 
+         $jogos_id = ($_POST['jogo']);
+         $disciplinas_id = ($_POST['disciplina']);
+
          if(!empty($nome) && !empty($descricao) && !empty($serie) && !empty($conteudo) && !empty($tempoDuracao) && !empty($objetivos) 
          && !empty($desenvolvimento) && !empty($materiais) && !empty($autor) && !empty($contato) && !empty($jogo_id) && !empty($disciplina_id) && !empty($tema_transversal_id))
          {
@@ -219,7 +222,7 @@
             if($p->msgErro == "")
             {
 
-                if($p->cadastrar($nome, $descricao, $serie, $conteudo, $tempoDuracao, $objetivos, $desenvolvimento, $materiais, $autor, $contato, $jogo_id, $disciplina_id, $tema_transversal_id))
+                if($p->cadastrar($nome, $descricao, $serie, $conteudo, $tempoDuracao, $objetivos, $desenvolvimento, $materiais, $autor, $contato, $jogo_id, $disciplina_id, $tema_transversal_id) && ($p->cadastrar2($jogos_id, $disciplinas_id)))
                 {
                   ?>
                     <div id="msg-sucesso">

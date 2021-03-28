@@ -19,9 +19,9 @@
 			$_SESSION['usuarioNome'] = $resultado['nome'];
 			$_SESSION['usuarioNiveisAcessoId'] = $resultado['tipo_perfil_id'];
 			$_SESSION['usuarioEmail'] = $resultado['email'];
-			if($_SESSION['usuarioNiveisAcessoId'] == "5"){
+			if($_SESSION['usuarioNiveisAcessoId'] == "1"){
 				header("Location: ../administrador/index_adm.php");
-			}elseif($_SESSION['usuarioNiveisAcessoId'] == "4"){
+			}elseif($_SESSION['usuarioNiveisAcessoId'] == "2"){
 				header("Location: index.php");
 			}
 		//Não foi encontrado um usuario na tabela usuário com os mesmos dados digitado no formulário
