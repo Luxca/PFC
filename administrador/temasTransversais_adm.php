@@ -1,18 +1,17 @@
 <?php
   require_once "../conexao/conexao.php"; 
 
-$query = sprintf("SELECT * FROM temas_transversais");
-
-$aux = sprintf("SELECT j.* from planos_aula as p join jogos as j on j.id = p.jogos_id join temas_transversais as t on t.id = p.temas_transversais_id");
-
-$dados = mysqli_query($conn,$query);
-$linha = mysqli_fetch_assoc($dados);
-$total = mysqli_num_rows($dados);
-
-
-$dados2 = mysqli_query($conn,$aux);
-$linha2 = mysqli_fetch_assoc($dados2);
-$total2 = mysqli_num_rows($dados2);
+  $query = ("SELECT * FROM temas_transversais");
+  
+  $query2 = ("SELECT j.* FROM jogos as j
+  join planos_aula as p on j.id = p.jogos_id 
+  join temas_transversais as t on t.id = p.temas_transversais_id 
+  order by p.id");
+  
+  $dados = mysqli_query($conn,$query);
+  $linha = mysqli_fetch_assoc($dados);
+  
+  $linha2 = mysqli_query($conn,$query2);
 ?>
 
 <!doctype html>
@@ -35,7 +34,7 @@ $total2 = mysqli_num_rows($dados2);
 <header>
     <div class="container-fluid" id="nav">
         <div class="row justify-content-center">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="navbar-brand" href="index_adm.php">
                         <img src="../usuario/img/logo.png" id="logo">
@@ -79,7 +78,7 @@ $total2 = mysqli_num_rows($dados2);
         </div>
     </div>
 </header>
-
+<hr>
     <div class="container-fluid">
 
         <div class="col-sm-12 text-center my-3">
@@ -124,15 +123,15 @@ $total2 = mysqli_num_rows($dados2);
                                         </div>
                                         <div class="col-sm-12">
                                             <h5> Jogos a que este tema transversal está vinculado: </h5>
-                                            <?php
-                                                do {
-                                            ?> 
                                             <div class="list-group">
-                                                <a href="#" class="list-group-item list-group-item-action"><?=$linha2['nome']?></a>
+                                                <a href="#" class="list-group-item list-group-item-action">
+                                                <?php
+                                                        if($jogo = mysqli_fetch_assoc($linha2)){
+                                                            echo $jogo['nome'] ;
+                                                        }
+                                                ?>
+                                                </a>
                                             </div>
-                                            <?php
-                                                }while($linha2 = mysqli_fetch_assoc($dados2));
-                                            ?>
                                         </div>
                                     </div>
                                 </div>

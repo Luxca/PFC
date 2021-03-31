@@ -28,7 +28,7 @@
 <header>
     <div class="container-fluid" id="nav">
         <div class="row justify-content-center">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="navbar-brand" href="index_adm.php">
                         <img src="../usuario/img/logo.png" id="logo">
@@ -72,7 +72,7 @@
         </div>
     </div>
 </header>>
-
+<hr>
 <div class="container-fluid">
 
 <div class="col-sm-12 text-center my-3">
@@ -212,8 +212,6 @@
          $disciplina_id = ($_POST['disciplina']);
          $tema_transversal_id = ($_POST['tema_transversal']);
 
-         $jogos_id = ($_POST['jogo']);
-         $disciplinas_id = ($_POST['disciplina']);
 
          if(!empty($nome) && !empty($descricao) && !empty($serie) && !empty($conteudo) && !empty($tempoDuracao) && !empty($objetivos) 
          && !empty($desenvolvimento) && !empty($materiais) && !empty($autor) && !empty($contato) && !empty($jogo_id) && !empty($disciplina_id) && !empty($tema_transversal_id))
@@ -222,7 +220,7 @@
             if($p->msgErro == "")
             {
 
-                if($p->cadastrar($nome, $descricao, $serie, $conteudo, $tempoDuracao, $objetivos, $desenvolvimento, $materiais, $autor, $contato, $jogo_id, $disciplina_id, $tema_transversal_id) && ($p->cadastrar2($jogos_id, $disciplinas_id)))
+                if($p->cadastrar($nome, $descricao, $serie, $conteudo, $tempoDuracao, $objetivos, $desenvolvimento, $materiais, $autor, $contato, $jogo_id, $disciplina_id, $tema_transversal_id))
                 {
                   ?>
                     <div id="msg-sucesso">

@@ -27,7 +27,7 @@ $total = mysqli_num_rows($dados);
 <header>
     <div class="container-fluid" id="nav">
         <div class="row justify-content-center">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="navbar-brand" href="index_adm.php">
                         <img src="../usuario/img/logo.png" id="logo">
@@ -72,10 +72,7 @@ $total = mysqli_num_rows($dados);
     </div>
 </header>
 
-
-
-    <div class="container-fluid">
-
+<hr>
         <div class="col-sm-12 text-center my-3">
             <h1>Jogos</h1>
             <div class="row justify-content-center mb-5 my-5">

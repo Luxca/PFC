@@ -24,7 +24,7 @@
 <header>
     <div class="container-fluid" id="nav">
         <div class="row justify-content-center">
-            <div class="col-sm-10">
+            <div class="col-sm-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="navbar-brand" href="index_adm.php">
                         <img src="../usuario/img/logo.png" id="logo">
@@ -68,7 +68,7 @@
         </div>
     </div>
 </header>
-
+<hr>
     <div class="container-fluid">
     
         <div class="col-sm-12 text-center my-3">
